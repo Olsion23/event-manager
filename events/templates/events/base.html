@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Event Manager</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <style>
+      .hero-section {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin-bottom: 2rem;
+      }
+
+      .hero-section .overlay {
+        text-align: center;
+        color: white;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+
+  <body
+    style="
+      background-image: url('https://wallpaperaccess.com/full/1567665.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    "
+  >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="/">Event Manager</a>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}" class="d-inline">
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-sm ms-2"
+                  style="cursor: pointer"
+                >
+                  Logout
+                </button>
+              </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+
+    <div class="hero-section mx-auto" style="max-height: 200px">
+      <div class="overlay">
+        <h2 class="text-white">Welcome to the event platform</h2>
+        <p class="text-white">
+          Discover and participate in your neighborhood's activities.
+        </p>
+      </div>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="container text-center mb-3">
+      <span class="fs-4 text-primary">
+        Welcome,
+        <a href="/" class="text-danger text-decoration-none">
+          <strong>{{ user.username }}</strong>
+        </a>
+      </span>
+    </div>
+
+    <div class="container text-center mb-4">
+      <a
+        href="{% url 'my_registrations' %}"
+        class="btn btn-outline-primary btn-sm"
+        style="font-size: 0.85rem; padding: 0.35rem 1rem"
+      >
+        My Registrations
+      </a>
+    </div>
+    {% endif %}
+
+    <main class="container">{% block content %}{% endblock %}</main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

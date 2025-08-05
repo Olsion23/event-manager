@@ -1,0 +1,41 @@
+{% extends 'events/base.html' %} {% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title mb-4">📋 My Registrations</h3>
+
+          {% if registrations %}
+          <ul class="list-group">
+            {% for registration in registrations %}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{{ registration.event.title }}</strong><br />
+                  <small class="text-muted">
+                    {{ registration.event.date }} at
+                    <strong>{{ registration.event.time }}</strong>
+                  </small>
+                </div>
+                <a
+                  href="{% url 'event_detail' registration.event.id %}"
+                  class="btn btn-sm btn-outline-primary"
+                >
+                  View
+                </a>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <div class="alert alert-info mb-0">
+            You have not registered for any events.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -156,6 +156,22 @@ This project helped me practice full-stack web development with Django, apply pr
 
 It was both a challenging and rewarding experience, and I am proud to present it as my final project for CS50x 2025.
 
+## License
+
+This project is free to use under the MIT License.
+See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Olsion Bejleri
+
+CS50x 2025 Student
+
+Passionate about Full-Stack Development, AI, Software Engineering, and Data Engineering.
+
+GitHub Profile
+https://github.com/Olsion23
+
 ## Acknowledgments
 
 Special thanks to Harvard University’s CS50 staff for providing one of the best learning experiences in computer science, and to the online community for continuous support and inspiration.
